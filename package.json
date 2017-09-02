@@ -1,0 +1,31 @@
+{
+  "name": "irupi-api",
+  "version": "1.0.0",
+  "description": "Backend para inventarios de irupi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcangh/Irupi-Api.git"
+  },
+  "author": "Juan Carlos Angulo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jcangh/Irupi-Api/issues"
+  },
+  "homepage": "https://github.com/jcangh/Irupi-Api#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.9",
+    "mongoose-pagination": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
