@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const rutasUsuarios = require('./rutas/Usuario');
+const rutasUsuarios = require('./rutas/RutaUsuario');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
