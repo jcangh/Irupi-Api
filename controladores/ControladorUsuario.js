@@ -22,7 +22,7 @@ function crearUsuario(req,res){
         usuario.nombres = parametros.nombres;
         usuario.apellidos = parametros.apellidos;
         usuario.correo = parametros.correo;
-        usuario.rol = 'ROL_USR';
+        usuario.rol = parametros.rol;
         usuario.estado = 'ACTIVO';
         
         bcrypt.hash(parametros.password,null,null,function(err,hash){
