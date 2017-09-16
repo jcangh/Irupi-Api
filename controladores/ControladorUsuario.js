@@ -54,7 +54,7 @@ function actualizarUsuario(req,res){
     var camposNuevos = req.body;
 
     if (idUsuario != req.user.sub){
-        return res.status(500).send({message: 'No tiene permisos para actalizar este usuario'});
+        return res.status(500).send({mensaje: 'No tiene permisos para actalizar este usuario'});
     }
 
     Usuario.findByIdAndUpdate(idUsuario,camposNuevos,(err,usuarioActualizado)=>{
@@ -117,10 +117,10 @@ function consultarUsuarios(req,res){
     let elementosPorPagina = 4;
     Usuario.find().sort('nombres').paginate(pagina,elementosPorPagina, function(err,usuarios,total){
         if (err){
-            res.status(500).send({message: 'Error en la petición'});
+            res.status(500).send({mensaje: 'Error en la petición'});
         }else{
             if (!usuarios){
-                res.status(404).send({message: 'No hay usuarios'});
+                res.status(404).send({mensaje: 'No hay usuarios'});
             }else{
                 res.status(200).send({
                     total: total,
@@ -131,10 +131,30 @@ function consultarUsuarios(req,res){
     });
 }
 
+function eliminarUsuario(req,res){
+    var idUsuario = req.params.id;
+
+    Usuario.findByIdAndRemove(idUsuario,(err,usuarioEliminado)=>{
+        if (err){
+            res.status(500).send({mensaje: 'Error en la petición'});
+        }else{
+            if (!usuarioEliminado){
+                res.status(404).send({mensaje: 'No se pudo eliminar el usuario'});
+            }else{
+                res.status(200).send({
+                    mensaje: 'El usuario se ha eliminado',
+                    usuario: usuarioEliminado
+                })
+            }
+        }
+    });
+}
+
 module.exports = {
     prueba,
     crearUsuario,
     actualizarUsuario,
     iniciarSesion,
-    consultarUsuarios
+    consultarUsuarios,
+    eliminarUsuario
 }
