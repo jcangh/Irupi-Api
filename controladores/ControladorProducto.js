@@ -36,6 +36,24 @@ function crearProducto(req,res){
     });
 }
 
+function consultarProductosN(req,res){
+    Producto.find((err,productos)=>{
+        if (err){
+            res.status(500).send({mensaje: 'Error en la petición'});
+        }else{
+            if (!productos){
+                res.status(404).send({mensaje:'No se pudo consultar los productos'});
+            }else{
+                res.status(200).send({
+                    mensaje: 'consulta completa',
+                    productos: productos
+                })
+            }
+        }
+    });
+}
+
 module.exports = {
-    crearProducto
+    crearProducto,
+    consultarProductosN
 }

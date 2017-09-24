@@ -8,5 +8,6 @@ const api = express.Router();
 
 //Crear producto
 api.post('/producto',mdSeguridad.autenticar,ControladorProducto.crearProducto);
+api.get('/productos-lista/',mdSeguridad.autenticar,ControladorProducto.consultarProductosN);
 
 module.exports = api;
