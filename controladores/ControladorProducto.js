@@ -53,7 +53,92 @@ function consultarProductosN(req,res){
     });
 }
 
+function consultarProducto(req,res){
+    let productoId = req.params.id;
+
+    Producto.findById(productoId,(err,producto)=>{
+        if (err){
+            res.status(500).send({mensaje: 'Error en la petición'});
+        }else{
+            if (!producto){
+                res.status(404).send({mensaje: 'El producto no existe'});
+            }else{
+                res.status(200).send({
+                    mensaje : 'Consulta exitosa',
+                    producto:producto
+                })
+            }
+        }
+    })
+}
+
+function eliminarProducto(req,res){
+    let productoId = req.params.id;
+
+    Producto.findByIdAndRemove(productoId,(err,productoEliminado)=>{
+        if (err){
+            res.status(500).send({mensaje: 'Error en la petición'});
+        }else{
+            if (!productoEliminado){
+                res.status(404).send({mensaje: 'El producto no se pudo eliminar'});
+            }else{
+                res.status(200).send({
+                    mensaje: 'El producto se ha eliminado',
+                    producto: productoEliminado
+                })
+            }
+        }
+    })
+}
+
+function consultarProductos(req,res){
+    if (req.params.pagina){
+        var pagina = req.params.pagina;
+    }else{
+        var pagina = 1;
+    }
+
+    let elementosPorPagina = 4;
+    Producto.find().sort('nombre').paginate(pagina,elementosPorPagina,function(err,productos,total){
+        if (err){
+            res.status(500).send({mensaje:'Error en la petición'});
+        }else{
+            if (!productos){
+                res.status(404).send({mensaje:'No se encontraron usuarios'});
+            }else{
+                res.status(200).send({
+                    total:total,
+                    productos:productos
+                })
+            }
+        }
+    });
+}
+
+function actualizarProducto(req,res){
+    let productoId = req.params.id;
+    let camposNuevos = req.body;
+
+    Producto.findByIdAndUpdate(productoId,camposNuevos,(err,productoActualizado)=>{
+        if (err){
+            res.status(500).send({mensaje:'Error en la petición'});
+        }else{
+            if (!productoActualizado){
+                res.status(404).send({mensaje: 'No se pudo actualizar el producto'});
+            }else{
+                res.status(200).send({
+                    mensaje:'El producto se ha actualizado correctamente',
+                    producto:productoActualizado
+                })
+            }
+        }
+    })
+}
 module.exports = {
     crearProducto,
-    consultarProductosN
+    consultarProductosN,
+    consultarProducto,
+    eliminarProducto,
+    consultarProductos,
+    actualizarProducto
 }
