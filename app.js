@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const rutasUsuarios = require('./rutas/RutaUsuario');
 const rutasProductos = require('./rutas/RutaProducto');
+const rutasVentas = require('./rutas/RutaVenta');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -23,5 +24,6 @@ app.use((req,res,next) => {
 //Rutas base
 app.use('/api/',rutasUsuarios);
 app.use('/api/',rutasProductos);
+app.use('/api/',rutasVentas);
 
 module.exports = app;
