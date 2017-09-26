@@ -121,7 +121,7 @@ function actualizarProducto(req,res){
 
     Producto.findByIdAndUpdate(productoId,camposNuevos,(err,productoActualizado)=>{
         if (err){
-            res.status(500).send({mensaje:'Error en la petición'});
+            res.status(500).send({mensaje:'Error en la petición '});
         }else{
             if (!productoActualizado){
                 res.status(404).send({mensaje: 'No se pudo actualizar el producto'});
