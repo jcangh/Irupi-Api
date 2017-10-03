@@ -10,8 +10,6 @@ function realizarVenta(req,res){
     let parametros = req.body;
     let productoId = parametros.productoId;
 
-    let productoParametro = null;
-
     let consultaUsuario = Producto.findById(productoId).where('cantidad').gt(parametros.cantidad).exec();
     
     consultaUsuario.then(function (producto){
